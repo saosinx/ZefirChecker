@@ -1,0 +1,65 @@
+.zefir-popup {
+	background: #6000AA;
+}
+
+.zefir-container {
+	display: flex;
+	font: 700 18px "Open Sans", Arial, sans-serif;
+	flex-direction: column;
+	padding: 5px;	
+	width: 200px;
+}
+
+.zefir-item {
+	border: 0;
+	font: inherit;
+}
+
+.zefir-input {
+	background: #8300E9;
+	color: #fff;
+	padding: 10px 15px;
+}
+
+.zefir-input::placeholder {
+	color: #ffffff6b;
+}
+
+.zefir-btn {
+	background: #19ffc0;
+	color: rgba(0,0,0,.5);
+	cursor: pointer;
+	display: block;
+	margin-top: 10px;
+	outline: none;
+	padding: 10px 12px;
+}
+
+.zefir-btn:hover {
+	background: #f2bf2f;
+	color: #fff;
+}
+
+.zefir-btn:active {
+	background: #cea225;
+}
+
+.zefirSuccess {
+	animation: successHighlight 750ms ease-out 0s 1 reverse;
+}
+
+.zefirFailure {
+	animation: failureHighlight 750ms ease-out 0s 1 reverse;
+}
+
+@keyframes successHighlight {
+  100% {
+		background-color:green;
+	}
+}
+
+@keyframes failureHighlight {
+  100% {
+		background-color:red;
+	}
+}
