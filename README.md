@@ -1,4 +1,4 @@
-<h1 align="center"># :star::star2::sparkles: Zefir Checker &middot; :sparkles::star2::star:</h1>
+<h1 align="center">:star::star2::sparkles: Zefir Checker &middot; :sparkles::star2::star:</h1>
 
 ### Installation
 
