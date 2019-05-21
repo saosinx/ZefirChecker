@@ -2,9 +2,17 @@
 <html>
   <head>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
-    <div class="zefir-select-container">
+    <div id="zefir-select" class="zefir-select-container">
       <div class="zefir-select" tabindex="0">
         <div class="zefir-select-inner">
           <div class="zefir-select-selected-value" title="Mystical India">
@@ -21,23 +29,13 @@
             </div>
           </div>
         </div>
-        <span
-          class="zefir-select-arrow"
-          unselectable="on"
-          style="user-select: none;"
-        >
-          <i
-            aria-label="icon: down"
-            class="zefiricon zefiricon-down zefir-select-arrow-icon"
-          >
+        <span class="zefir-select-arrow" unselectable="on">
+          <i class="zefiricon zefir-select-arrow-icon">
             <svg
               viewBox="64 64 896 896"
-              class=""
-              data-icon="down"
               width="1em"
               height="1em"
               fill="currentColor"
-              aria-hidden="true"
               focusable="false"
             >
               <path

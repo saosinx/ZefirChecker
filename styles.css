@@ -1,3 +1,8 @@
+div {
+	margin: 0;
+	padding: 0;
+}
+
 #cycle_version {
 	position: absolute;
 	top: 50%;
@@ -20,6 +25,14 @@
 	width: 200px;
 }
 
+.zefir-select-container_focused .zefir-select-search {
+	display: block !important;
+}
+
+.zefir-select-container_opened .zefir-select-selected-value {
+	opacity: 0.4 !important;
+}
+
 .zefir-select {
 	background-color: #fff;
 	border: 1px solid #d9d9d9;
@@ -33,13 +46,7 @@
 	user-select: none;
 }
 
-.zefir-select:hover {
-	border-color: #40a9ff;
-	border-right-width: 1px !important;
-}
-
-.zefir-select:active,
-.zefir-select:focus {
+.zefir-select-container_focused .zefir-select {
 	border-color: #40a9ff;
 	border-right-width: 1px !important;
 	box-shadow: 0 0 0 2px rgba(24,144,255,0.2);
@@ -47,8 +54,8 @@
 }
 
 .zefir-select-inner {
-	position: relative;
 	display: block;
+	position: relative;
 	margin-right: 11px;
 	margin-left: 11px;
 	line-height: 30px;
@@ -58,25 +65,26 @@
 .zefir-select-selected-value {
 	float: left;
 	max-width: 100%;
-	padding-right: 20px;
 	overflow: hidden;
 	opacity: 1;
-	white-space: nowrap;
+	padding-right: 20px;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .zefir-select-search {
+	display: none;
 	position: absolute;
 	height: 100%;
 	width: 100%;
 }
 
 .zefir-select-inner::after {
-	display: inline-block;
-	width: 0;
-	visibility: hidden;
 	content: '.';
+	display: inline-block;
 	pointer-events: none;
+	visibility: hidden;
+	width: 0;
 }
 
 .zefir-select-search-inner {
@@ -144,6 +152,7 @@
 	text-align: center;
 	text-transform: none;
 	vertical-align: -0.125em;
+	user-select: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
