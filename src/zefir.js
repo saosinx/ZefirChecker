@@ -27,13 +27,16 @@ chrome.runtime.onMessage.addListener(request => {
 console.log("DOMContentLoaded");
 
 const zefirSelect = document.getElementById("zefir-select");
+const zefirInput = zefirSelect.querySelector(".zefir-select-search-input");
+const zefirDropdown = zefirSelect.querySelector(".zefir-select-dropdown");
+const zefirArrowIcon = zefirSelect.querySelector(".zefir-select-arrow");
+console.log(zefirInput);
+
 zefirSelect.addEventListener("click", function() {
   this.classList.add("zefir-select-container_focused");
   this.classList.add("zefir-select-container_opened");
 
-  if (this.id !== "zefir-select") {
-    console.log("unfocused");
-  }
+  zefirInput.focus()
 });
 
 document.addEventListener("click", function(e) {

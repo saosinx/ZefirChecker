@@ -13,17 +13,10 @@
 			"128": "images/img128.png"
 		}
 	},
-	"background": {
-		"scripts": [
-			"background.js"
-		],
-		"persistent": false
-	},
 	"content_scripts": [
 		{
 			"matches": [
-				"https://*/*",
-				"file:///*"
+				"<all_urls>"
 			],
 			"js": [
 				"zefir.js"
