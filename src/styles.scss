@@ -1,8 +1,10 @@
 #cycle_version {
+	// display: none !important;
 	position: absolute;
-	top: 70%;
-	left: 60%;
+	top: 60%;
+	left: 70%;
 	transform: translate(-50%, -50%) scale(2);
+	user-select: none !important;
 }
 
 .zefir-select-container {
@@ -15,7 +17,9 @@
 	line-height: 1.5;
 	list-style: none;
 	font-feature-settings: 'tnum';
-	position: relative;
+	position: absolute;
+	top: 1%;
+	left: 1%;
 	display: inline-block;
 	outline: 0;
 	width: 200px;
@@ -194,6 +198,26 @@
 			outline: none;
 			list-style: none;
 			transition: max-height .2s ease;
+
+			&::-webkit-scrollbar {
+				background-color: #fff;
+				width: 9px
+			}
+		
+			/* background of the scrollbar except button or resizer */
+			&::-webkit-scrollbar-track {
+				background-color: #fff
+			}
+			
+			/* scrollbar itself */
+			&::-webkit-scrollbar-thumb {
+				background-color: #babac0;
+				border-radius: 16px;
+				border: 3px solid #fff
+			}
+			
+			/* set button(top and bottom of the scrollbar) */
+			body::-webkit-scrollbar-button {display:none}
 
 			li {
 				user-select: none;
