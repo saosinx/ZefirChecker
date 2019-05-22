@@ -39,7 +39,7 @@
 		}
 
 		.zefir-select-dropdown {
-			display: block;
+			opacity: 1;
 
 			ul {
 				max-height: 250px;
@@ -180,9 +180,11 @@
 		background-color: #fff;
 		border-radius: 4px;
 		outline: none;
+		opacity: 0;
 		-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 		box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 		width: 200px;
+		transition: opacity .2s ease;
 
 		ul {
 			max-height: 0;

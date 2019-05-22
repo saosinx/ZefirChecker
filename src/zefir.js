@@ -24,56 +24,78 @@ chrome.runtime.onMessage.addListener((request) => {
 	}
 })
 
-console.log('%cDOMContentLoaded', 'color: salmon;')
+function activateZefir() {
+	const fillDropdownMenu = function() {
+		for (let i = 0; i < zefirList.options.length; i += 1) {
+			const elem = document.createElement('li')
 
-const zefirMain = document.getElementById('cycle_version') || null
+			elem.innerHTML = zefirList.options[i].innerHTML
+			elem.setAttribute('value', zefirList.options[i].value)
 
-const zefirSelect = document.getElementById('zefir-select')
-const zefirInput = zefirSelect.querySelector('.zefir-select-search-input')
-const zefirSelectedValue = zefirSelect.querySelector('.zefir-select-selected-value')
-const zefirDropdown = zefirSelect.querySelector('.zefir-select-dropdown')
-const zefirArrowIcon = zefirSelect.querySelector('.zefir-select-arrow')
+			zefirDropdown.children[0].appendChild(elem)
 
-for (let i = 0; i < zefirMain.options.length; i += 1) {
-	const elem = document.createElement('li')
-
-	elem.innerHTML = zefirMain.options[i].innerHTML
-	elem.setAttribute('value', zefirMain.options[i].value)
-
-	zefirDropdown.children[0].appendChild(elem)
-}
-
-zefirInput.addEventListener('input', (e) => {
-	zefirInput.value.length
-		? (zefirSelectedValue.style.display = 'none')
-		: (zefirSelectedValue.style.display = 'block')
-})
-
-zefirSelect.addEventListener('click', (e) => {
-	if (e.target.closest('.zefir-select-arrow')) {
-		zefirSelect.classList.contains('--focused') ? '' : zefirSelect.classList.add('--focused')
-		zefirSelect.classList.toggle('--opened')
-		zefirSelect.classList.contains('--opened') ? zefirInput.focus() : zefirInput.blur()
-		return
+			if (zefirList.value === zefirList.options[i].value) {
+				zefirSelectedValue.setAttribute('value', zefirList.value)
+				zefirSelectedValue.innerHTML = zefirList.options[i].innerHTML
+			}
+		}
 	}
 
-	if (e.target.tagName === 'LI') {
+	const setListOption = function(option) {
 		zefirSelect.classList.remove('--opened')
 		zefirInput.blur()
 
-		zefirSelectedValue.innerHTML = e.target.innerHTML
-		zefirSelectedValue.setAttribute('title', e.target.innerHTML)
+		zefirList.value = option.getAttribute('value')
 
-		return
+		zefirSelectedValue.innerHTML = option.innerHTML
+		zefirSelectedValue.setAttribute('value', option.getAttribute('value'))
 	}
 
-	zefirSelect.classList.add('--focused')
-	zefirSelect.classList.add('--opened')
-	zefirInput.focus()
-})
+	const zefirSelect = document.getElementById('zefir-select')
+	const zefirInput = zefirSelect.querySelector('.zefir-select-search-input')
+	const zefirSelectedValue = zefirSelect.querySelector('.zefir-select-selected-value')
+	const zefirDropdown = zefirSelect.querySelector('.zefir-select-dropdown')
 
-document.addEventListener('click', (e) => {
-	if (!e.target.closest('#zefir-select')) {
-		zefirSelect.classList.remove('--focused', '--opened')
-	}
-})
+	fillDropdownMenu()
+
+	zefirInput.addEventListener('input', (e) => {
+		zefirInput.value.length
+			? (zefirSelectedValue.style.display = 'none')
+			: (zefirSelectedValue.style.display = 'block')
+
+		// TODO: form list of options after 'input' event
+	})
+
+	zefirSelect.addEventListener('click', (e) => {
+		const target = e.target
+
+		if (target.closest('.zefir-select-arrow')) {
+			zefirSelect.classList.contains('--focused') ? '' : zefirSelect.classList.add('--focused')
+			zefirSelect.classList.toggle('--opened')
+			zefirSelect.classList.contains('--opened') ? zefirInput.focus() : zefirInput.blur()
+
+			return
+		}
+
+		if (target.tagName === 'LI') {
+			setListOption(target)
+
+			return
+		}
+
+		zefirSelect.classList.add('--focused', '--opened')
+		zefirInput.focus()
+	})
+
+	document.addEventListener('click', (e) => {
+		if (!e.target.closest('#zefir-select')) {
+			zefirSelect.classList.remove('--focused', '--opened')
+		}
+	})
+}
+
+console.log('%cDOMContentLoaded', 'color: salmon;')
+
+const zefirList = document.getElementById('cycle_version')
+
+zefirList ? activateZefir() : ''
