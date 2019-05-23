@@ -2,10 +2,9 @@
 	"author": "Nikita Zhurawski",
 	"name": "ZefirChecker",
 	"manifest_version": 2,
-	"version": "0.0.1",
+	"version": "1.0.1",
 	"version_name": "initial",
 	"browser_action": {
-		"default_popup": "popup.html",
 		"default_icon": {
 			"16": "images/img16.png",
 			"32": "images/img32.png",
