@@ -37,6 +37,12 @@ function activateZefir() {
 		zefirSelectedValue.style.display = 'block'
 	}
 
+	const setZefirSelectPosition = function() {
+		const rect = zefirList.getBoundingClientRect()
+		zefirSelect.style.top = `${rect.top + rect.height / 2 + window.scrollY}px`
+		zefirSelect.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`
+	}
+
 	const setListOption = function(option) {
 		zefirSelect.classList.remove('--opened')
 		zefirInput.blur()
@@ -53,6 +59,8 @@ function activateZefir() {
 	const zefirDropdown = zefirSelect.querySelector('.zefir-select-dropdown-list')
 
 	fillDropdownMenu()
+
+	setTimeout(setZefirSelectPosition, 50)
 
 	zefirInput.addEventListener('input', (e) => {
 		zefirInput.value.length
@@ -85,6 +93,8 @@ function activateZefir() {
 			setListOption(e.target)
 			resetDropdownMenu()
 
+			console.log(zefirList.value, zefirList.options[zefirList.value].innerHTML)
+
 			return
 		}
 
@@ -98,6 +108,8 @@ function activateZefir() {
 			resetDropdownMenu()
 		}
 	})
+
+	window.addEventListener('resize', () => setZefirSelectPosition())
 }
 
 console.log('%cDOMContentLoaded', 'color: salmon;')

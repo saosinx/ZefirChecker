@@ -1,10 +1,9 @@
 #cycle_version {
-	// display: none !important;
-	position: absolute;
-	top: 60%;
-	left: 70%;
-	transform: translate(-50%, -50%) scale(2);
 	user-select: none !important;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	visibility: hidden;
 }
 
 .zefir-select-container {
@@ -18,12 +17,13 @@
 	list-style: none;
 	font-feature-settings: 'tnum';
 	position: absolute;
-	top: 1%;
-	left: 1%;
+	top: 0;
+	left: 0;
 	display: inline-block;
 	outline: 0;
+	transform: translate(-50%, -50%);
 	width: 200px;
-	transform: translate(50%, 50%) scale(2); // ********DELETE********* //
+	z-index: 999;
 
 	&.--focused {
 		.zefir-select {
