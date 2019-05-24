@@ -89,7 +89,7 @@ function activateZefir() {
 
 	Zefir.select = generateZefirSelectMarkup()
 
-	document.body.appendChild(Zefir.select)
+	zefirList.parentNode.appendChild(Zefir.select)
 
 	const zefirInput = Zefir.select.querySelector('.zefir-select-search-input')
 	const zefirValue = Zefir.select.querySelector('.zefir-select-selected-value')
