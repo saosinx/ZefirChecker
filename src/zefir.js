@@ -40,12 +40,6 @@ function activateZefir() {
 		zefirValue.style.display = 'block'
 	}
 
-	const setZefirSelectPosition = function() {
-		const rect = zefirList.getBoundingClientRect()
-		// Zefir.select.style.top = `${rect.top + rect.height / 2 + window.scrollY}px`
-		// Zefir.select.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`
-	}
-
 	const setListOption = function(option) {
 		Zefir.select.classList.remove('--opened')
 		zefirInput.blur()
@@ -97,8 +91,6 @@ function activateZefir() {
 
 	fillDropdownMenu()
 
-	setTimeout(setZefirSelectPosition, 100)
-
 	zefirInput.addEventListener('input', (e) => {
 		zefirInput.value.length
 			? (zefirValue.style.display = 'none')
@@ -145,8 +137,6 @@ function activateZefir() {
 			resetDropdownMenu()
 		}
 	})
-
-	window.addEventListener('resize', () => setZefirSelectPosition())
 }
 
 console.log('%cDOMContentLoaded', 'color: salmon;')
@@ -168,23 +158,3 @@ console.log('%cDOMContentLoaded', 'color: salmon;')
 
 	setTimeout( checkDOMChange, 100 )
 })()
-
-// const cycleVersionTemp = document.createElement('select')
-// cycleVersionTemp.setAttribute('id', 'cycle_version')
-// cycleVersionTemp.setAttribute('aria-hidden', 'true')
-// cycleVersionTemp.innerHTML = `
-// 	<option value="1">Joker Goes Wild</option>
-// 	<option value="2">Robinhood Mega Stacks</option>
-// 	<option value="3">Queen of the Pharaohs</option>
-// 	<option value="4">Double Chilli</option>
-// 	<option value="5">Blood Sport</option>
-// 	<option value="6">Karate Kid</option>
-// 	<option value="7">Wild Shot</option>
-// 	<option value="8">Gold Shot</option>
-// 	<option value="9">Mystical India</option>
-// 	<option value="10">Olympic Cash</option>
-// 	<option value="11">Polka Reel</option>
-// 	<option value="12">Rambo</option>
-// `
-
-// document.body.appendChild(cycleVersionTemp)
