@@ -152,7 +152,12 @@ function activateZefir() {
 console.log('%cDOMContentLoaded', 'color: salmon;')
 
 ;(function checkDOMChange() {
-	zefirList = document.getElementById('cycle_version')
+	zefirList = document.querySelector("#cycle_version:not([aria-hidden='true'])")
+
+	if (zefirList && (zefirList.getAttribute('aria-hidden') === 'true')) {
+		zefirList = false
+	}
+
 	Zefir.select = document.getElementById('zefir-select')
 
 	if (zefirList && !Zefir.select) {
@@ -164,21 +169,22 @@ console.log('%cDOMContentLoaded', 'color: salmon;')
 	setTimeout( checkDOMChange, 100 )
 })()
 
-const cycleVersionTemp = document.createElement('select')
-cycleVersionTemp.setAttribute('id', 'cycle_version')
-cycleVersionTemp.innerHTML = `
-	<option value="1">Joker Goes Wild</option>
-	<option value="2">Robinhood Mega Stacks</option>
-	<option value="3">Queen of the Pharaohs</option>
-	<option value="4">Double Chilli</option>
-	<option value="5">Blood Sport</option>
-	<option value="6">Karate Kid</option>
-	<option value="7">Wild Shot</option>
-	<option value="8">Gold Shot</option>
-	<option value="9">Mystical India</option>
-	<option value="10">Olympic Cash</option>
-	<option value="11">Polka Reel</option>
-	<option value="12">Rambo</option>
-`
+// const cycleVersionTemp = document.createElement('select')
+// cycleVersionTemp.setAttribute('id', 'cycle_version')
+// cycleVersionTemp.setAttribute('aria-hidden', 'true')
+// cycleVersionTemp.innerHTML = `
+// 	<option value="1">Joker Goes Wild</option>
+// 	<option value="2">Robinhood Mega Stacks</option>
+// 	<option value="3">Queen of the Pharaohs</option>
+// 	<option value="4">Double Chilli</option>
+// 	<option value="5">Blood Sport</option>
+// 	<option value="6">Karate Kid</option>
+// 	<option value="7">Wild Shot</option>
+// 	<option value="8">Gold Shot</option>
+// 	<option value="9">Mystical India</option>
+// 	<option value="10">Olympic Cash</option>
+// 	<option value="11">Polka Reel</option>
+// 	<option value="12">Rambo</option>
+// `
 
-document.body.appendChild(cycleVersionTemp)
+// document.body.appendChild(cycleVersionTemp)
