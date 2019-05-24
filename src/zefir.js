@@ -1,6 +1,9 @@
 const Zefir = {
 	list: [],
+	select: undefined
 }
+
+let zefirList = {}
 
 function activateZefir() {
 	const fillDropdownMenu = function() {
@@ -39,12 +42,12 @@ function activateZefir() {
 
 	const setZefirSelectPosition = function() {
 		const rect = zefirList.getBoundingClientRect()
-		zefirSelect.style.top = `${rect.top + rect.height / 2 + window.scrollY}px`
-		zefirSelect.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`
+		Zefir.select.style.top = `${rect.top + rect.height / 2 + window.scrollY}px`
+		Zefir.select.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`
 	}
 
 	const setListOption = function(option) {
-		zefirSelect.classList.remove('--opened')
+		Zefir.select.classList.remove('--opened')
 		zefirInput.blur()
 
 		zefirList.value = option.getAttribute('value')
@@ -84,13 +87,13 @@ function activateZefir() {
 		return elem
 	}
 
-	const zefirSelect = generateZefirSelectMarkup()
+	Zefir.select = generateZefirSelectMarkup()
 
-	document.body.appendChild(zefirSelect)
+	document.body.appendChild(Zefir.select)
 
-	const zefirInput = zefirSelect.querySelector('.zefir-select-search-input')
-	const zefirValue = zefirSelect.querySelector('.zefir-select-selected-value')
-	const zefirDropdown = zefirSelect.querySelector('.zefir-select-dropdown-list')
+	const zefirInput = Zefir.select.querySelector('.zefir-select-search-input')
+	const zefirValue = Zefir.select.querySelector('.zefir-select-selected-value')
+	const zefirDropdown = Zefir.select.querySelector('.zefir-select-dropdown-list')
 
 	fillDropdownMenu()
 
@@ -114,11 +117,11 @@ function activateZefir() {
 		}
 	})
 
-	zefirSelect.addEventListener('click', (e) => {
+	Zefir.select.addEventListener('click', (e) => {
 		if (e.target.closest('.zefir-select-arrow')) {
-			zefirSelect.classList.contains('--focused') ? '' : zefirSelect.classList.add('--focused')
-			zefirSelect.classList.toggle('--opened')
-			zefirSelect.classList.contains('--opened') ? zefirInput.focus() : zefirInput.blur()
+			Zefir.select.classList.contains('--focused') ? '' : Zefir.select.classList.add('--focused')
+			Zefir.select.classList.toggle('--opened')
+			Zefir.select.classList.contains('--opened') ? zefirInput.focus() : zefirInput.blur()
 
 			return
 		}
@@ -127,18 +130,18 @@ function activateZefir() {
 			setListOption(e.target)
 			resetDropdownMenu()
 
-			console.log(zefirList.value, zefirList.options[zefirList.value].innerHTML)
+			console.log(zefirList.value, Zefir.list.find(elem => elem.value === zefirList.value).name)
 
 			return
 		}
 
-		zefirSelect.classList.add('--focused', '--opened')
+		Zefir.select.classList.add('--focused', '--opened')
 		zefirInput.focus()
 	})
 
 	document.addEventListener('click', (e) => {
 		if (!e.target.closest('#zefir-select')) {
-			zefirSelect.classList.remove('--focused', '--opened')
+			Zefir.select.classList.remove('--focused', '--opened')
 			resetDropdownMenu()
 		}
 	})
@@ -148,6 +151,34 @@ function activateZefir() {
 
 console.log('%cDOMContentLoaded', 'color: salmon;')
 
-const zefirList = document.getElementById('cycle_version')
+;(function checkDOMChange() {
+	zefirList = document.getElementById('cycle_version')
+	Zefir.select = document.getElementById('zefir-select')
 
-zefirList ? activateZefir() : ''
+	if (zefirList && !Zefir.select) {
+		activateZefir()
+	} else if (!zefirList && Zefir.select) {
+		Zefir.select.parentNode.removeChild(Zefir.select)
+	}
+
+	setTimeout( checkDOMChange, 100 )
+})()
+
+const cycleVersionTemp = document.createElement('select')
+cycleVersionTemp.setAttribute('id', 'cycle_version')
+cycleVersionTemp.innerHTML = `
+	<option value="1">Joker Goes Wild</option>
+	<option value="2">Robinhood Mega Stacks</option>
+	<option value="3">Queen of the Pharaohs</option>
+	<option value="4">Double Chilli</option>
+	<option value="5">Blood Sport</option>
+	<option value="6">Karate Kid</option>
+	<option value="7">Wild Shot</option>
+	<option value="8">Gold Shot</option>
+	<option value="9">Mystical India</option>
+	<option value="10">Olympic Cash</option>
+	<option value="11">Polka Reel</option>
+	<option value="12">Rambo</option>
+`
+
+document.body.appendChild(cycleVersionTemp)
