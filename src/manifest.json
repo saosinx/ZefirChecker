@@ -18,6 +18,9 @@
 				"https://jira.skywindgroup.com/projects/*",
 				"file://*/*"
 			],
+			"css": [
+				"styles.css"
+			],
 			"js": [
 				"zefir.js"
 			],
