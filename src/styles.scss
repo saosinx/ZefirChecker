@@ -1,6 +1,14 @@
 #cycle_version:not([aria-selected="true"]) {
 	user-select: none !important;
 	visibility: hidden !important;
+	height: 0 !important;
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.containerx {
+	margin: 100px;
 }
 
 .zefir-select-container {
@@ -15,12 +23,8 @@
 	line-height: 1.5;
 	list-style: none;
 	font-feature-settings: 'tnum';
-	position: absolute;
-	top: 0;
-	left: 0;
 	display: inline-block;
 	outline: 0;
-	transform: translate(-50%, -50%);
 	width: 250px;
 	z-index: 999;
 

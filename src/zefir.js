@@ -42,8 +42,8 @@ function activateZefir() {
 
 	const setZefirSelectPosition = function() {
 		const rect = zefirList.getBoundingClientRect()
-		Zefir.select.style.top = `${rect.top + rect.height / 2 + window.scrollY}px`
-		Zefir.select.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`
+		// Zefir.select.style.top = `${rect.top + rect.height / 2 + window.scrollY}px`
+		// Zefir.select.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`
 	}
 
 	const setListOption = function(option) {
