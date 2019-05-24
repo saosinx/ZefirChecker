@@ -1,59 +1,63 @@
-const Zefir = {
+const ZEFIR = {
 	list: [],
-	select: undefined
+	source: undefined,
+	html: {
+		select: undefined,
+		input: undefined,
+		value: undefined,
+		dropdown: undefined,
+	},
 }
-
-let zefirList = {}
 
 function activateZefir() {
 	const fillDropdownMenu = function() {
-		for (let i = 0; i < zefirList.options.length; i += 1) {
+		for (let i = 0; i < ZEFIR.source.options.length; i += 1) {
 			const elem = document.createElement('li')
 
-			elem.innerHTML = zefirList.options[i].innerHTML
-			elem.setAttribute('value', zefirList.options[i].value)
+			elem.innerHTML = ZEFIR.source.options[i].innerHTML
+			elem.setAttribute('value', ZEFIR.source.options[i].value)
 
-			Zefir.list.push({
-				name: zefirList.options[i].innerHTML,
-				value: zefirList.options[i].value,
+			ZEFIR.list.push({
+				name: ZEFIR.source.options[i].innerHTML,
+				value: ZEFIR.source.options[i].value,
 			})
 
-			zefirDropdown.appendChild(elem)
+			ZEFIR.html.dropdown.appendChild(elem)
 
-			if (zefirList.value === zefirList.options[i].value) {
-				zefirValue.setAttribute('value', zefirList.value)
-				zefirValue.innerHTML = zefirList.options[i].innerHTML
+			if (ZEFIR.source.value === ZEFIR.source.options[i].value) {
+				ZEFIR.html.value.setAttribute('value', ZEFIR.source.value)
+				ZEFIR.html.value.innerHTML = ZEFIR.source.options[i].innerHTML
 			}
 		}
 	}
 
 	const resetDropdownMenu = function(force = false) {
 		const cb = function() {
-			;[].forEach.call(zefirDropdown.children, (child) => {
+			;[].forEach.call(ZEFIR.html.dropdown.children, (child) => {
 				child.style.display === 'none' ? (child.style.display = 'block') : ''
 			})
 		}
 
 		force ? cb() : setTimeout(cb, 300)
 
-		zefirInput.value = ''
-		zefirValue.style.display = 'block'
+		ZEFIR.html.input.value = ''
+		ZEFIR.html.value.style.display = 'block'
 	}
 
 	const setListOption = function(option) {
-		Zefir.select.classList.remove('--opened')
-		zefirInput.blur()
+		ZEFIR.html.select.classList.remove('--opened')
+		ZEFIR.html.input.blur()
 
-		zefirList.value = option.getAttribute('value')
+		ZEFIR.source.value = option.getAttribute('value')
 
-		zefirValue.innerHTML = option.innerHTML
-		zefirValue.setAttribute('value', option.getAttribute('value'))
+		ZEFIR.html.value.innerHTML = option.innerHTML
+		ZEFIR.html.value.setAttribute('value', option.getAttribute('value'))
 	}
 
 	const generateZefirSelectMarkup = function() {
 		elem = document.createElement('div')
 		elem.setAttribute('id', 'zefir-select')
-		elem.setAttribute('class', 'zefir-select-container');
+		elem.setAttribute('class', 'zefir-select-container')
 		elem.innerHTML = `
 			<div class="zefir-select" tabindex="0">
 				<div class="zefir-select-inner">
@@ -81,24 +85,29 @@ function activateZefir() {
 		return elem
 	}
 
-	Zefir.select = generateZefirSelectMarkup()
+	ZEFIR.html.select = generateZefirSelectMarkup()
 
-	zefirList.parentNode.appendChild(Zefir.select)
+	ZEFIR.source.parentNode.appendChild(ZEFIR.html.select)
 
-	const zefirInput = Zefir.select.querySelector('.zefir-select-search-input')
-	const zefirValue = Zefir.select.querySelector('.zefir-select-selected-value')
-	const zefirDropdown = Zefir.select.querySelector('.zefir-select-dropdown-list')
+	ZEFIR.html.input = ZEFIR.html.select.querySelector('.zefir-select-search-input')
+	ZEFIR.html.value = ZEFIR.html.select.querySelector('.zefir-select-selected-value')
+	ZEFIR.html.dropdown = ZEFIR.html.select.querySelector('.zefir-select-dropdown-list')
 
 	fillDropdownMenu()
 
-	zefirInput.addEventListener('input', (e) => {
-		zefirInput.value.length
-			? (zefirValue.style.display = 'none')
-			: (zefirValue.style.display = 'block')
+	console.log(
+		'%c🦄🦄🦄 Zefir Select creater 🦄🦄🦄',
+		'color: aqua;font-size: 18px;font-weight: bold;'
+	)
 
-		if (zefirInput.value.length) {
-			;[].forEach.call(zefirDropdown.children, (child) => {
-				if (!child.innerHTML.toLowerCase().includes(zefirInput.value)) {
+	ZEFIR.html.input.addEventListener('input', (e) => {
+		ZEFIR.html.input.value.length
+			? (ZEFIR.html.value.style.display = 'none')
+			: (ZEFIR.html.value.style.display = 'block')
+
+		if (ZEFIR.html.input.value.length) {
+			;[].forEach.call(ZEFIR.html.dropdown.children, (child) => {
+				if (!child.innerHTML.toLowerCase().includes(ZEFIR.html.input.value)) {
 					child.style.display = 'none'
 				} else if (child.style.display === 'none') {
 					child.style.display = 'block'
@@ -109,11 +118,15 @@ function activateZefir() {
 		}
 	})
 
-	Zefir.select.addEventListener('click', (e) => {
+	ZEFIR.html.select.addEventListener('click', (e) => {
 		if (e.target.closest('.zefir-select-arrow')) {
-			Zefir.select.classList.contains('--focused') ? '' : Zefir.select.classList.add('--focused')
-			Zefir.select.classList.toggle('--opened')
-			Zefir.select.classList.contains('--opened') ? zefirInput.focus() : zefirInput.blur()
+			ZEFIR.html.select.classList.contains('--focused')
+				? ''
+				: ZEFIR.html.select.classList.add('--focused')
+			ZEFIR.html.select.classList.toggle('--opened')
+			ZEFIR.html.select.classList.contains('--opened')
+				? ZEFIR.html.input.focus()
+				: ZEFIR.html.input.blur()
 
 			return
 		}
@@ -122,39 +135,48 @@ function activateZefir() {
 			setListOption(e.target)
 			resetDropdownMenu()
 
-			console.log(zefirList.value, Zefir.list.find(elem => elem.value === zefirList.value).name)
+			console.log(
+				ZEFIR.source.value,
+				ZEFIR.list.find((elem) => elem.value === ZEFIR.source.value).name
+			)
 
 			return
 		}
 
-		Zefir.select.classList.add('--focused', '--opened')
-		zefirInput.focus()
+		ZEFIR.html.select.classList.add('--focused', '--opened')
+		ZEFIR.html.input.focus()
 	})
 
 	document.addEventListener('click', (e) => {
 		if (!e.target.closest('#zefir-select')) {
-			Zefir.select.classList.remove('--focused', '--opened')
+			ZEFIR.html.select.classList.remove('--focused', '--opened')
 			resetDropdownMenu()
 		}
 	})
 }
 
-console.log('%cDOMContentLoaded', 'color: salmon;')
-
+console.log(
+	'%c🍻🍻🍻 DOMContentLoaded 🍻🍻🍻',
+	'color: sandyBrown;font-size: 18px;font-weight: bold;'
+)
 ;(function checkDOMChange() {
-	zefirList = document.querySelector("#cycle_version:not([aria-hidden='true'])")
+	ZEFIR.source = document.querySelector("#cycle_version:not([aria-hidden='true'])")
 
-	if (zefirList && (zefirList.getAttribute('aria-hidden') === 'true')) {
-		zefirList = false
+	if (ZEFIR.source && ZEFIR.source.getAttribute('aria-hidden') === 'true') {
+		ZEFIR.source = undefined
 	}
 
-	Zefir.select = document.getElementById('zefir-select')
+	ZEFIR.html.select = document.getElementById('zefir-select')
 
-	if (zefirList && !Zefir.select) {
+	if (ZEFIR.source && !ZEFIR.html.select) {
 		activateZefir()
-	} else if (!zefirList && Zefir.select) {
-		Zefir.select.parentNode.removeChild(Zefir.select)
+	} else if (!ZEFIR.source && ZEFIR.html.select) {
+		ZEFIR.html.select.parentNode.removeChild(ZEFIR.html.select)
+		cconsole.log(
+			'%c⭐⭐⭐ Zefir Select removed ⭐⭐⭐',
+			'color: gold;font-size: 18px;font-weight: bold;'
+		)
 	}
 
-	setTimeout( checkDOMChange, 100 )
+	setTimeout(checkDOMChange, 100)
 })()
