@@ -5,6 +5,7 @@
 	border: 0 !important;
 	padding: 0 !important;
 	margin: 0 !important;
+	position: absolute !important;
 }
 
 .containerx {
@@ -23,6 +24,7 @@
 	line-height: 1.5;
 	list-style: none;
 	font-feature-settings: 'tnum';
+	position: relative;
 	display: inline-block;
 	outline: 0;
 	width: 250px;
