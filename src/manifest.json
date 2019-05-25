@@ -15,7 +15,8 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"https://jira.skywindgroup.com/projects/*"
+				"https://jira.skywindgroup.com/projects/*",
+				"file://*/*"
 			],
 			"css": [
 				"styles.css"
