@@ -96,7 +96,7 @@ activateZefir = () ->
 		
 		if ZEFIR.html.input.value.length
 			[].forEach.call ZEFIR.html.dropdown.children, (child) =>
-				if not child.innerHTML.toLowerCase().includes ZEFIR.html.input.value
+				if not child.innerHTML.toLowerCase().includes ZEFIR.html.input.value.toLowerCase()
 					child.style.display = 'none'
 				else if child.style.display is 'none'
 					child.style.display = 'block'
