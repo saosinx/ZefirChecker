@@ -49,7 +49,7 @@ gulp.task 'pug', (done) =>
 gulp.task 'sass', (done) =>
 	gulp
 		.src 'src/styles.scss'
-		.pipe sass(outputStyle: 'compressed').on 'error', sass.logError
+		.pipe sass().on 'error', sass.logError
 		.pipe gulp.dest 'dist'
 	do done
 
